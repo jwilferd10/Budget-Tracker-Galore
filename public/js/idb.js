@@ -43,3 +43,13 @@ function saveRecord(record) {
 }
 
 // Create a function that will handle collecting all of the data from the pending object store in IndexedDB and POST it to the server
+function checkDatabase() {
+    // Open a transaction on the db
+    const transaction = db.transaction(['pending'], 'readwrite');
+
+    // access object store
+    const store = transaction.objectStore('pending');
+
+    // Get all records from store and set to variable
+    const getAll = store.getAll();
+}
