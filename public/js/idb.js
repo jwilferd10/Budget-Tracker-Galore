@@ -12,12 +12,34 @@ request.onupgradeneeded = function(event) {
     db.createObjectStore('pending', { autoIncrement: true });
 };
 
+// Upon a successful
 request.onsuccess = function(event) {
     // when db is successfully created with its object store (from onupgradedneeded event above), save reference to db in global variable
     db = event.target.result;
 
     // check if app is online, if yes run checkDatabase() function to send all local db data to api
-    // if (navigator.onLine) {
+    if (navigator.onLine) {
+        checkDatabase();
+    }
+};
 
-    // }
+// Log the error here
+request.onerror = function(event) {
+    console.log(event.target.errorCode);
+};
+
+// Explicitly open a transaction, or a temporary connection to the database. 
+// This will help the IndexedDB database maintain an accurate reading of the data it stores so that data isn't in flux all the time.
+// This function will be executed if we attempt to save a transaction 
+function saveRecord(record) {
+    // Open a new transaction with the database with pending and write permissions
+    const transaction = db.transaction(['pending'], 'readwrite');
+
+    // Access the object store for 'pending'
+    const store = transaction.objectStore('pending');
+
+    // Add record to your store with add method
+    store.add(record);
 }
+
+// Create a function that will handle collecting all of the data from the pending object store in IndexedDB and POST it to the server
