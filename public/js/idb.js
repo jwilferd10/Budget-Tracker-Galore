@@ -44,7 +44,7 @@ function saveRecord(record) {
 
 // Create a function that will handle collecting all of the data from the pending object store in IndexedDB and POST it to the server
 function checkDatabase() {
-    // Open a transaction on the db
+    // Open a new transaction to the database to read the data.
     const transaction = db.transaction(['pending'], 'readwrite');
 
     // access object store
@@ -52,4 +52,38 @@ function checkDatabase() {
 
     // Get all records from store and set to variable
     const getAll = store.getAll();
+
+    // Upon a successful .getAll() execution, run this function
+    getAll.onSuccess = function() {
+        // If there was data in indexedDb's store, send it to the api server
+        if (getAll.result.length > 0) {
+            fetch('/api/transaction/bulk', {
+              method: 'POST'  ,
+              body: JSON.stringify(getAll.result),
+              headers: {
+                  Accept: 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(serverResponse => {
+                if (serverResponse.message) {
+                  throw new Error(serverResponse);
+                }
+                // Open one more transaction
+                const transaction = db.transaction(['pending'], 'readwrite');
+                // Access the store object
+                const store = transaction.objectStore('pending');
+                // Clear all items in store
+                store.clear();
+                // Possibly insert an alert here
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+    }
 }
+
+// Listen for if the app comes back online
+window.addEventListener('online', checkDatabase);
