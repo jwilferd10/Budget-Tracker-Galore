@@ -2,8 +2,8 @@
     "name": "Budget-Tracker-Galore",
     "short_name": "Budget-Tracker",
     "icon": [],
-    "theme_color": "",
-    "background_color": "",
-    "start_url": "",
-    "display": ""
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "start_url": ".",
+    "display": "standalone"
 }
