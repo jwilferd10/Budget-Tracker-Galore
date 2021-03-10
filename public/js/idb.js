@@ -76,8 +76,8 @@ function checkDatabase() {
                 const store = transaction.objectStore('pending');
                 // Clear all items in store
                 store.clear();
-                // Possibly insert an alert here
             })
+            // Show error if any
             .catch(err => {
                 console.log(err);
             });
