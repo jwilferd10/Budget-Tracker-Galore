@@ -1,7 +1,7 @@
 {
     "name": "Budget-Tracker-Galore",
     "short_name": "Budget-Tracker",
-    "icon": [
+    "icons": [
         {
             "src": "assets/images/icons/icon-72x72.png",
             "sizes": "72x72",
