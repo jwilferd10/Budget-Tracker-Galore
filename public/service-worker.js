@@ -7,9 +7,9 @@ const CACHE_NAME = APP_PREFIX + VERSION;
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
-    "/index.js",
-    "/idb.js",
-    "/styles.css"
+    "/js/index.js",
+    "/js/idb.js",
+    "/css/styles.css"
 ];
 
 // use e.waitUntil to tell the browser to wait until the work is complete before terminating the service worker.
