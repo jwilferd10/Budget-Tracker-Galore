@@ -13,14 +13,14 @@ const FILES_TO_CACHE = [
 ];
 
 // use e.waitUntil to tell the browser to wait until the work is complete before terminating the service worker.
-self.addEventListener('install', function (e) {
-    e.waitUntil(
-        // Use caches.open to find the specific cache by name, then add every file in the FILES_TO_CACHE array to the cache.
-        caches.open(CACHE_NAME).then(function (cache) {
-            console.log('installing cache : ' + CACHE_NAME)
-        })
-    )
-})
+// self.addEventListener('install', function (e) {
+//     e.waitUntil(
+//         // Use caches.open to find the specific cache by name, then add every file in the FILES_TO_CACHE array to the cache.
+//         caches.open(CACHE_NAME).then(function (cache) {
+//             console.log('installing cache : ' + CACHE_NAME)
+//         })
+//     )
+// })
 
 // Clear out any old data from the cache and tell the service worker how to manage caches.
 self.addEventListener('activate', function(e) {
