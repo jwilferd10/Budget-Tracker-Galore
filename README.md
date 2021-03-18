@@ -6,6 +6,9 @@
 <br>
 **Github Repo:** https://github.com/jwilferd10/Budget-Tracker-Galore
 
+## Screenshot Example:
+![image](example.png)
+
 ## Table of Contents 
   - [Description](#description)
   - [User Story](#user-story)
