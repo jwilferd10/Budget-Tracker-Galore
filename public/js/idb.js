@@ -54,11 +54,11 @@ function checkDatabase() {
     const getAll = store.getAll();
 
     // Upon a successful .getAll() execution, run this function
-    getAll.onSuccess = function() {
+    getAll.onsuccess = function() {
         // If there was data in indexedDb's store, send it to the api server
         if (getAll.result.length > 0) {
             fetch('/api/transaction/bulk', {
-              method: 'POST'  ,
+              method: 'POST',
               body: JSON.stringify(getAll.result),
               headers: {
                   Accept: 'application/json, text/plain, */*',
@@ -82,7 +82,7 @@ function checkDatabase() {
                 console.log(err);
             });
         }
-    }
+    };
 }
 
 // Listen for if the app comes back online

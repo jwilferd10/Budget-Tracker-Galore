@@ -136,6 +136,8 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
+    // Remember, the fetch() function's .catch() method is only executed on network failure!
+    console.log(err);
     saveRecord(transaction);
 
     // clear form
